@@ -10,6 +10,7 @@ class ListArray : public List<T> {
       int max;
       int n;
       static const int MINSIZE = 2;
+
       void resize(int new_size){
         T* new_arr = new T[new_size];
 	for(int i=0; i< max; i++){
@@ -19,6 +20,7 @@ class ListArray : public List<T> {
         arr = new_arr;
 	max = new_size;
       }
+
    public:
       ListArray(){
 	 arr = new T[MINSIZE];
@@ -34,152 +36,75 @@ class ListArray : public List<T> {
 	 }
          return arr[pos];
       }
-      /*
-      friend std::ostream&operator<<(std::ostream &out, const ListArray<T &list){
-   	 T* current = list.arr; // Supongo que arr es un puntero al primer nodo
-         while (current != nullptr) {
-            out << current->data << " ";
-            current = current->next;
-         }
-         return out;  
+
+      friend std::ostream&operator<<(std::ostream &out, const ListArray<T> &list){
+      	for(int i=0;i<list.size();i++){
+	  out << list.get(i);
+	}
+	return out;
       }
-      */
 
       void insert(int pos, T e) override{
-         T* prev = nullptr; 
-         if(pos < 0 || pos > size){
-           throw out_of_range("La posición no es válida");
-     	 }
-         else {
-           if(pos == 0){ //insertar pos == 0 -> primera posició
-             T* n  = new T(e);
-             n -> next = arr;
-             arr = n;
-           }
-           else { // insertar en altres posicions
-             int i = 0;
-             T* aux = arr;
-             while(aux != nullptr && i < pos-1){
-               aux = aux -> next;
-               i++;
-               T* n = new T(e);
-               n -> next = aux -> next;
-               aux -> next = n;
-             }      
-           }
-           size++;
-         }
-      }
-      void append(T e) override{
-	T* aux = arr;
-        T* prevAux = nullptr;
-        T* node = new T(e);
-        int i = 0;
-        while(i < size){
-          if(i == size-1){
-            aux->next = node;
-            node->next = nullptr;
-            size++;
-          }
-          prevAux = aux;
-          aux = aux ->next;  
-        }
-      }	
-      void prepend(T e) override{
-	T* aux = arr;
-	T* node = new T(e);
-	node->next = aux;
-	arr = node;
-	size++;
-      }
-      T remove(int pos) override{
-	 if(pos < 0 || pos > size){
+      	if(pos < 0 || pos > size()){
             throw out_of_range("La posición no es válida");
-      	 }
-         T* aux = arr;
-         T* prevAux = nullptr;
+        }
+	if(size() >= max){
+          resize(n*2);
+        }
+	for(int i=n; i>pos;i--){
+	  arr[i] = arr[i-1];
+
+	}
+	arr[pos]= e;
+	n++;
+      }
       
-         for(int i= 0; i < size; i++){
-            if(i == pos){
-               if(i == 0){
-                  aux = aux -> next;
-                  T temp = aux->data;
-                  delete arr;
-                  arr = aux;
-                  return temp;
-	       }
-               else if(i == size-1){
-                  T temp = aux->data;
-                  delete aux;
-                  aux = prevAux;
-                  aux-> next = nullptr;
-                  return temp;
-               }
-               else{
-                  T* temp = aux;
-                  T temp2 = aux->data;
-                  aux = aux->next;
-                  delete temp; 
-                  prevAux ->next = aux;
-                  return temp2;
-               }
-            }
-            else{
-              prevAux= aux;
-              aux = aux ->next;
-            }
-         }
-         return -1;
+      void append(T e) override{
+        insert(n, e);
       }
-      T get(int pos) override{
-	if(pos < 0 || pos > size){
+
+      void prepend(T e) override{
+      	insert(0, e);
+      }
+
+      T remove(int pos) override{
+        if(pos < 0 || pos >= size()){
+            throw out_of_range("La posición no es válida");
+        }
+	T valor = arr[pos];
+	for(int i=pos;i<n;i++){
+	   arr[i] = arr[i+1];
+	}
+	n--;
+	if(size() <= max/2){
+          resize(n/2);
+        }
+	return valor;
+	
+      }
+
+      T get(int pos) const override{
+	if(pos < 0 || pos >= size()){
             throw out_of_range("La posición no es válida");
          }
-         T* aux = arr;
-         T* prevAux = nullptr;
-
-         for(int i= 0; i < size; i++){
-            if(i == pos){
-               if(i == 0){
-                  T temp = aux->data;
-                  return temp;
-               }
-               else if(i == size-1){
-                  T temp = aux->data;
-                  return temp;
-               }
-               else{
-                  T temp2 = aux->data;
-                  return temp2;
-               }
-            }
-            else{
-              prevAux= aux;
-              aux = aux ->next;
-            }
-         }
-         return -1;
-
-      }
-      int search(T e) override{
-	T* aux = arr;
-        for(int i= 0; i < size; i++){
-           if(aux->data == e){
-              return i;
-           }
-           else{
-             aux = aux->next;
-           }
-        }
-        return -1;	
+         return arr[pos];
       }
 
-      bool empty() override{
+      int search(T e) const override{
+        for(int i=0;i<n;i++){
+	   if(arr[i]==e){
+	      return i;
+	   }
+	}
+	return -1;	
+      }
+
+      bool empty() const override{
         return (n == 0);
         
       }
       
-      int size() override {
+      int size() const override {
      
 	      return n;
       }
