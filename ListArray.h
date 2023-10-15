@@ -38,9 +38,11 @@ class ListArray : public List<T> {
       }
 
       friend std::ostream&operator<<(std::ostream &out, const ListArray<T> &list){
-      	for(int i=0;i<list.size();i++){
-	  out << list.get(i);
+      	out << "List -> [";
+         for(int i=0;i<list.size();i++){
+	  out << list.get(i) << " ";
 	}
+	out << "]";
 	return out;
       }
 
