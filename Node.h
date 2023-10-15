@@ -12,9 +12,7 @@ class Node {
 	this->next = next;
       }
       friend std::ostream& operator<<(std::ostream &out, const Node<T> &node){
-	while(next != nullptr){
-	  out << node->data;
-	}
+	out << node.data;
 	return out;
       }
 };
