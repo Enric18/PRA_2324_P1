@@ -16,12 +16,13 @@ class ListLinked : public List<T> {
 	}
 
 	~ListLinked(){
-	  Node<T>* aux;
+	  Node<T>* aux = first;
 	  for(int i=0; i< size(); i++){
-	    aux = first->next;
-	    delete[] first-> next;
-	    first = aux;
+	     Node<T>* temp = aux;
+	     aux = aux->next;
+	     delete[] temp;
 	  }
+	  first = nullptr;
 	}
 
 	T operator[](int pos){
@@ -41,7 +42,7 @@ class ListLinked : public List<T> {
             Node<T>* aux = list.first;
 	    out << "List -> [";
 	    for(int i=0; i<list.size(); i++){
-                out << aux-> data << " ";
+                out << aux-> data << ", ";
                 aux = aux-> next;
 	    }
 	    out << "]";
