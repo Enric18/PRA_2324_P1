@@ -33,10 +33,12 @@ std::ostream& operator<<(std::ostream &out, const Circle &c){
    return out;
 }
 
+
 double Circle::area() const{
    return 3.141592*radius*radius;
 }
-	   
+
+
 double Circle::perimeter() const{
    return 2*3.141592*radius;
 }
@@ -51,3 +53,4 @@ void Circle::print(){
   cout << "Circle: " << "\nColor: " << get_color() << "\nCentro: (" << center.x << ", " << center.y << ")" << "\nRadio: "<< radius<< "\n";
 
 }
+ 

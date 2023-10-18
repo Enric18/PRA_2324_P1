@@ -14,10 +14,10 @@ class Shape{
       Shape(string color);
       string get_color() const;
       void set_color(string c);
-      virtual double area() const;
-      virtual double perimeter() const;
-      virtual void translate(double incX, double incY);
-      virtual void print();
+      virtual double area() const = 0;
+      virtual double perimeter() const = 0;
+      virtual void translate(double incX, double incY) = 0; 
+      virtual void print()=0;
 
 };
 #endif
