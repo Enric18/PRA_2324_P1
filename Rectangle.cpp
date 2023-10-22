@@ -95,11 +95,11 @@ Rectangle& Rectangle::operator= (const Rectangle &r){
 }
 
 ostream& operator<<(ostream &out, const Rectangle &r){
-   out << "Rectangle: " << " Color= " << r.get_color() << "  Vertices: [";
+   out << "Rectangle: " << " Color = " << r.get_color() << "  || Vertices: [";
    for(int i=0; i<4; i++){
         out << "(" << r.get_vertex(i).x << ", " <<  r.get_vertex(i).y << "), ";
    }
-   out << "]";
+   out << "]" << endl;
    return out;
 }
 
@@ -127,10 +127,6 @@ void Rectangle::translate(double incX, double incY){
 }
 
 void Rectangle::print(){
-   cout << "Rectangle: " << " Color= " << get_color() << "  Vertices: [";
-   for(int i=0; i<4; i++){
-	cout << "(" << vs[i].x << ", " <<  vs[i].y << "), ";
-   }
-   cout << "]";
+   cout << *this;
 }
 

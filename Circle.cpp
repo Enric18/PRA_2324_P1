@@ -29,7 +29,7 @@ void Circle::set_radius(double r){
 }
 
 std::ostream& operator<<(std::ostream &out, const Circle &c){
-   out << "Circle: " << "\nColor: " << c.get_color() << "\nCentro: (" << c.get_center().x << ", " << c.get_center().y << ")" << "\nRadio: "<< c.get_radius()<< "\n";
+   out << "Circle: " << " Color = " << c.get_color() << " || Centro = (" << c.get_center().x << ", " << c.get_center().y << ")" << " || Radio = "<< c.get_radius()<< "\n";
    return out;
 }
 
@@ -50,7 +50,7 @@ void Circle::translate(double incX, double incY){
 }
 
 void Circle::print(){
-  cout << "Circle: " << "\nColor: " << get_color() << "\nCentro: (" << center.x << ", " << center.y << ")" << "\nRadio: "<< radius<< "\n";
+  cout << *this;
 
 }
  

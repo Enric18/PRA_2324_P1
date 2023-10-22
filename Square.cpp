@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace std;
 
-bool Square::check(Point2D* vertices){
+bool Square::check(Point2D* vertices){  // Comprueba si es un cuadrilatero regular pero no si es un cuadrado, podría ser un rombo
    double d01 = Point2D::distance(vertices[0], vertices[1]);
    double d23 = Point2D::distance(vertices[2], vertices[3]);
    double d12 = Point2D::distance(vertices[1], vertices[2]);
@@ -60,11 +60,11 @@ void Square::set_vertices(Point2D* vertices){
 
 
 ostream& operator<<(ostream &out, const Square &r){
-   out << "Square: " << " Color= " << r.get_color() << "  Vertices: [";
+   out << "Square: " << " Color = " << r.get_color() << "  || Vertices: [";
    for(int i=0; i<4; i++){
         out << "(" << r.get_vertex(i).x << ", " <<  r.get_vertex(i).y << "), ";
    }
-   out << "]";
+   out << "]" << endl;
    return out;
 }
 

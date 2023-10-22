@@ -86,7 +86,7 @@ class ListLinked : public List<T> {
       }
 
       T remove(int pos) override{
-	 if(pos < 0 || pos >= size()){
+	     if(pos < 0 || pos >= size()){
            throw out_of_range("La posición no es válida");
          }
          Node<T>* aux = first;
@@ -100,7 +100,7 @@ class ListLinked : public List<T> {
                T temp = aux->data;
                delete first;
                first = aux;
-	       n--;
+	           n--;
                return temp;
              }
              else if(i == size()-1){  
@@ -108,7 +108,7 @@ class ListLinked : public List<T> {
                delete aux;
                aux = prevAux;
                aux-> next = nullptr;
-	       n--;
+	           n--;
                return temp;
              }
              else{
@@ -117,7 +117,7 @@ class ListLinked : public List<T> {
                 aux = aux->next;
                 delete temp; 
                 prevAux -> next = aux;
-		n--;
+		        n--;
                 return temp2;
              }
            }
@@ -125,8 +125,8 @@ class ListLinked : public List<T> {
              prevAux = aux;
              aux = aux ->next;
            }
-	}
-        return -1;
+	    }
+        return T(); // A esta línea no se llega nunca, pero da un warning. Retornamos un objeto de tipo T recién creado
       }
 
       T get(int pos) const override{
