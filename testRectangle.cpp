@@ -11,7 +11,7 @@ int main(){
     vertices[3] = Point2D(-1,-1);
     Rectangle r2("green", vertices);
 
-    /*
+
     std::cout << "r1 = " << r1 << std::endl;
     std::cout << "r1.area() => " << r1.area() << "; r1.perimeter() => " << r1.perimeter() <<  std::endl;
     std::cout << "r2 = " << r2 << std::endl; 
@@ -42,5 +42,5 @@ int main(){
     std::cout << "r3.translate(100, 100); Aleshores..." << std::endl;
     std::cout << "r1 = " << r1 << std::endl;
     std::cout << "r3 = " << r3 << std::endl;
-*/
+
 }

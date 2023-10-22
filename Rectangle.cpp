@@ -18,6 +18,7 @@ bool Rectangle::check(Point2D* vertices){
 }
 
 Rectangle::Rectangle(){
+   vs = new Point2D[4];
    vs[0].x = -1;
    vs[0].y = 0.5;
    vs[1].x = 1;
@@ -29,10 +30,13 @@ Rectangle::Rectangle(){
 }
 
 Rectangle::Rectangle(string color, Point2D* vertices){
+   vs = new Point2D[4];
    bool rect = check(vertices);
    if(rect == true){
       this->color = color;
-      vs = vertices;
+      for(int i=0; i<4; i++){
+        vs[i]=vertices[i];
+      }
    }
    else{
       throw invalid_argument("No se forma un rectángulo");
@@ -40,7 +44,11 @@ Rectangle::Rectangle(string color, Point2D* vertices){
 }
 
 Rectangle::Rectangle(const Rectangle &r){
-   
+  vs = new Point2D[4];
+  for(int i=0; i<4; i++){
+     vs[i]=r.vs[i];
+  }
+  color=r.color;
 }
 
 Rectangle::~Rectangle(){
@@ -66,16 +74,32 @@ Point2D Rectangle::operator[](int ind) const{
 
 }
 
-//void Rectangle::set_vertices(Point2D* vertices);
-Rectangle& operator= (const Rectangle &r){
-   return r;
+void Rectangle::set_vertices(Point2D* vertices){
+   bool rect = check(vertices);
+   if(rect == true){
+      for(int i=0; i<4; i++){
+        vs[i]=vertices[i];
+      }
+   }
+   else{
+      throw invalid_argument("No se forma un rectángulo");
+   }
+}
+
+Rectangle& Rectangle::operator= (const Rectangle &r){
+  for(int i=0; i<4; i++){
+    vs[i]=r.vs[i];
+  }
+  color=r.color;
+  return *this;
 }
 
 ostream& operator<<(ostream &out, const Rectangle &r){
-   out << "Rectangle: " << "\nColor: " << r.get_color() << "\nVertices: [";
+   out << "Rectangle: " << " Color= " << r.get_color() << "  Vertices: [";
    for(int i=0; i<4; i++){
-        out << "( " << r.get_vertex(i).x << ", " <<  r.get_vertex(i).y << "), ";
+        out << "(" << r.get_vertex(i).x << ", " <<  r.get_vertex(i).y << "), ";
    }
+   out << "]";
    return out;
 }
 
@@ -103,9 +127,10 @@ void Rectangle::translate(double incX, double incY){
 }
 
 void Rectangle::print(){
-   cout << "Rectangle: " << "\nColor: " << get_color() << "\nVertices: [";
+   cout << "Rectangle: " << " Color= " << get_color() << "  Vertices: [";
    for(int i=0; i<4; i++){
-	cout << "( " << vs[i].x << ", " <<  vs[i].y << "), ";
+	cout << "(" << vs[i].x << ", " <<  vs[i].y << "), ";
    }
+   cout << "]";
 }
 

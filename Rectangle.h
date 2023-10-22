@@ -20,7 +20,7 @@ class Rectangle : public Shape{
 	~Rectangle();
 	Point2D get_vertex(int ind) const;
 	Point2D operator[](int ind) const;
-	//virtual void set_vertices(Point2D* vertices);
+	virtual void set_vertices(Point2D* vertices);
 	Rectangle& operator= (const Rectangle &r);
 	friend ostream& operator<<(ostream &out, const Rectangle &r);
 	double area() const override;
