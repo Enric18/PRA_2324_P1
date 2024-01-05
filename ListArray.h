@@ -46,6 +46,16 @@ class ListArray : public List<T> {
 	return out;
       }
 
+
+      void duplicatepairs_list() override {
+	int actual = n;
+        for(int i=0; i<actual; i++){
+	   T val = arr[i*2];
+	   insert(i*2, val);
+	}
+      }
+
+
       void insert(int pos, T e) override{
       	if(pos < 0 || pos > size()){
             throw out_of_range("La posición no es válida");
@@ -79,7 +89,7 @@ class ListArray : public List<T> {
 	}
 	n--;
 	if(size() <= max/2){
-          resize(n/2);
+         resize((n/2)+1);
         }
 	return valor;
 	

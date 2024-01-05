@@ -10,6 +10,16 @@ bin/testListLinked: testListLinked.cpp ListLinked.h List.h
 	mkdir -p bin
 	g++ -o bin/testListLinked testListLinked.cpp ListLinked.h
 
+bin/prova: provaLink.cpp provaArr.cpp ListArray.h ListLinked.h List.h
+	mkdir -p bin
+	g++ -o bin/provaLink provaLink.cpp ListLinked.h
+	g++ -o bin/provaArr provaArr.cpp ListArray.h
+
+bin/praD: praD_Linked.cpp praD_Array.cpp ListArray.h ListLinked.h List.h
+	mkdir -p bin
+	g++ -o bin/praD_Linked praD_Linked.cpp ListLinked.h
+	g++ -o bin/praD_Array praD_Array.cpp ListArray.h
+
 Point2D.o: Point2D.h Point2D.cpp
 	g++ -c Point2D.cpp
 

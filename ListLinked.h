@@ -20,7 +20,7 @@ class ListLinked : public List<T> {
 	  for(int i=0; i< size(); i++){
 	     Node<T>* temp = aux;
 	     aux = aux->next;
-	     delete[] temp;
+	     delete temp;
 	  }
 	  first = nullptr;
 	}
@@ -49,10 +49,13 @@ class ListLinked : public List<T> {
 	    return out;
 	}
 
+
 	void insert(int pos, T e) override{
 	  if(pos < 0 || pos > size()){
             throw out_of_range("La posición no es válida");
           }
+
+
             if(pos == 0){ //insertar pos == 0 -> primera posició
               Node<T>* ne = new Node(e);
               ne -> next = first;
@@ -74,7 +77,7 @@ class ListLinked : public List<T> {
                }
 
 	    }
-            n++;
+           n++;
         }
 
       void append(T e) override{
@@ -85,7 +88,19 @@ class ListLinked : public List<T> {
       	insert(0, e);
       }
 
-      T remove(int pos) override{
+
+      void duplicatepairs_list() override {
+	Node<T>* aux = first;
+        int actual = n;
+        for(int i=0; i<actual; i++){
+	   T val = aux -> data;
+	   insert(i*2, val);
+	   aux = aux -> next;
+	}
+      }
+
+
+      T remove(int pos) override {
 	     if(pos < 0 || pos >= size()){
            throw out_of_range("La posición no es válida");
          }
@@ -93,11 +108,11 @@ class ListLinked : public List<T> {
          Node<T>* prevAux = nullptr;
       
          for(int i= 0; i < size(); i++){
-	   
+
            if(i == pos){
              if(i == 0){
-               aux = aux -> next;
                T temp = aux->data;
+               aux = aux -> next;
                delete first;
                first = aux;
 	           n--;
@@ -125,6 +140,7 @@ class ListLinked : public List<T> {
              prevAux = aux;
              aux = aux ->next;
            }
+
 	    }
         return T(); // A esta línea no se llega nunca, pero da un warning. Retornamos un objeto de tipo T recién creado
       }
